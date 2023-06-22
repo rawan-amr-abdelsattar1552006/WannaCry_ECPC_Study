@@ -472,39 +472,34 @@ print(a ^ b)
 eyes, mouths, bodies = [int(x) for x in input().split(" ")]
 looping = True
 largest_possible_number = 0
-
+index_of_method = 0
 while looping:
     first_method = min([eyes // 2 , bodies])
     second_method = min([eyes // 2 , mouths, bodies])
     third_method = min([eyes, mouths, bodies])
-
-    methods = [first_method, second_method, third_method]
     
-    current_max = max(methods)
-
-    print(largest_possible_number, current_max)
+    methods = [third_method, first_method, second_method]
+    
+    current_max = methods[index_of_method]
     largest_possible_number += current_max
     
-    
-    index_of_method = methods.index(current_max)
-
-    if current_max == 0:
-        looping = False
-    
-    elif index_of_method == 0:
+    if current_max == 0 and index_of_method < 2:
+        index_of_method += 1
+    elif current_max == 0 and index_of_method == 2:
+        break
+    elif index_of_method == 1:
         eyes -= (current_max * 2)
         bodies -= current_max
         
-    elif index_of_method == 1:
+    elif index_of_method == 2:
         eyes -= (2 * current_max)
         mouths -= current_max
         bodies -= current_max
-    else:
+        
+    elif index_of_method == 0:
         eyes -= current_max
         mouths -= current_max
         bodies -= current_max
-
-    print(eyes, mouths, bodies)
     
 
 print(largest_possible_number)
