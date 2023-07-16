@@ -463,30 +463,43 @@ a,b = [int(x) for x in input().split(" ")]
 print(a ^ b)
 
 """
-
-
 """
-
 # ICPC Assiut : Contest#1 Problem G
 
 eyes, mouths, bodies = [int(x) for x in input().split(" ")]
+
 looping = True
+
 largest_possible_number = 0
 index_of_method = 0
+90 24 89
+
+1st = 45
+2nd = 24
+3rd = 24
+
 while looping:
     first_method = min([eyes // 2 , bodies])
     second_method = min([eyes // 2 , mouths, bodies])
     third_method = min([eyes, mouths, bodies])
     
     methods = [third_method, first_method, second_method]
+    m = [24,45,24]
     
-    current_max = methods[index_of_method]
-    largest_possible_number += current_max
+    current_max = methods[index_of_method] = 24
+    largest_possible_number += current_max = 24
     
     if current_max == 0 and index_of_method < 2:
         index_of_method += 1
+        
     elif current_max == 0 and index_of_method == 2:
         break
+    
+    elif index_of_method == 0:
+        eyes -= current_max
+        mouths -= current_max
+        bodies -= current_max
+        
     elif index_of_method == 1:
         eyes -= (current_max * 2)
         bodies -= current_max
@@ -496,10 +509,7 @@ while looping:
         mouths -= current_max
         bodies -= current_max
         
-    elif index_of_method == 0:
-        eyes -= current_max
-        mouths -= current_max
-        bodies -= current_max
+    
     
 
 print(largest_possible_number)
@@ -696,8 +706,26 @@ for i in range(1,n + 1):
     if n % i == 0:
         print(i)
 """
+"""
+#Sheet 2 Problem L
 
-# Sheet 2 Problem L
+x,y = [int(i) for i in input().split(" ")]
+
+def GCD(x,y):
+    while True:
+        if x == y:
+            return x
+        elif x == 0 :
+            return y
+        elif y == 0 :
+            return x
+        else:
+            x,y = x % y, y % x
+    return 1
+
+print(GCD(x,y))
+"""
+
 
 """
 # Sheet 2 Problem M
@@ -759,4 +787,378 @@ for i in range(n):
      reverse = list(num[::-1])
      print(" ".join(reverse))
 """
+"""
+# Sheet 2 Problem R
 
+while True:
+    a,b = [int(x) for x in input().split(" ")]
+    nums = []
+    nums_ = []
+    
+    if a <= 0 or b <= 0:
+        break
+    else:
+        for i in range(min(a,b), max(a,b) + 1):
+            nums.append(i)
+            nums_.append(str(i))
+
+    print(" ".join(nums_), f"sum ={sum(nums)}")
+"""
+
+"""
+# Sheet 2 Problem S
+
+n = int(input())
+
+for i in range(n):
+    a,b = [int(x) for x in input().split(" ")]
+    nums = []
+
+    for j in range(min(a,b) + 1, max(a,b)):
+        if j % 2 != 0:
+            nums.append(j)
+
+    print(sum(nums))
+"""
+
+"""
+# Sheet 2 Problem T
+
+n = int(input())
+pattern = []
+
+init = 1
+
+for i in range(n):
+    pattern.append(f"{init * '*'}")
+    init += 2
+
+for string in pattern:
+    print(string.center(len(pattern[-1])).rstrip())
+"""
+
+"""
+# Sheet 2 Problem U
+
+n, a, b = [int(x) for x in input().split()]
+result = []
+
+for i in range(1, n + 1):
+    Sum = 0
+    
+    for num in str(i) :
+        Sum += int(num)
+        
+    if Sum >= a and Sum <= b:
+        result.append(i)
+
+print(sum(result))
+"""
+
+"""
+# Sheet 2 Problem V
+
+n = int(input())
+lst = []
+
+init = 1
+
+for i in range(n):
+    lst_ = []
+    for j in range(init,init + 3):
+        lst_.append(str(j))
+
+    lst.append(lst_)
+    init += 4
+
+for i in lst:
+    print(" ".join(i), "PUM")
+"""
+
+"""
+# Sheet 2 Problem W
+
+n = int(input())
+pattern = []
+
+init = 1
+
+for i in range(n):
+    pattern.append(f"{init * '*'}")
+    init += 2
+    
+init = len(pattern[-1])
+center = init
+
+for i in range(n):
+    pattern.append(f"{init * '*'}")
+    init -= 2
+
+for string in pattern:
+    print(string.center(center).rstrip())
+
+"""
+
+"""
+# Sheet 2 Problem X    
+
+n = int(input())
+
+for i in range(n):
+    x = int(input())
+    num_of_ones = str(bin(x)).count("1")
+
+    ones = "".join(["1" for i in range(num_of_ones)])
+    print(int(ones,2))
+"""
+"""
+# Sheet 2 Problem Y
+
+x = int(input())
+
+def fib(n, computed={0:0, 1:1}):
+    if n not in computed:
+        computed[n] = fib(n-1, computed) + fib(n - 2, computed)
+    
+    return computed[n]
+
+fibs = [str(fib(i)) for i in range(x)]
+
+print(" ".join(fibs))
+
+"""    
+"""
+# Sheet 2 Problem Z
+
+from itertools import product
+
+k, s = [int(x) for x in input().split(" ")]
+
+perm = list(product([i for i in range(k + 1) if i <= s], repeat=3))
+count = 0
+
+for i in perm:
+    if sum(i) == s:
+        count += 1
+
+print(count)
+"""
+"""
+# contest #2 problem A
+
+a,b = [int(x) for x in input().split(" ")]
+
+if a - b >= 0:
+    print(a - b)
+else:
+    print(0)
+"""
+"""
+# contest #2 problem B
+
+import math
+n = int(input())
+
+init_back_slash = 0
+init_forward_slash = -1
+
+for i in range(n):
+    line = ["*" for i in range(n)]
+    if init_back_slash == n:
+        print("Done!")
+        break
+    elif init_forward_slash + math.ceil(n/2) != 0:
+        line[init_back_slash] = "\\"
+        line[init_forward_slash] = "/"
+        init_back_slash += 1
+        init_forward_slash -= 1
+    
+    else:
+        line[init_back_slash] = "X"
+        init_back_slash += 1
+        init_forward_slash -= 1
+    print("".join(line))
+    
+"""
+"""
+# contest #2 Problem C
+x,y = [int(i) for i in input().split(" ")]
+lst = [int(i) for i in input().split(" ")]
+
+new_lst = []
+
+if x % y == 0:
+    init = 0
+    last = y
+    for i in range(x // y):
+        item = lst[init:last]
+        init += y
+        last += y
+        new_lst.append(item)
+
+else:
+    rem = x % y
+    init = 0
+    last = y
+    for _ in range(x // y):
+        item = lst[init:last]
+        init += y
+        last += y
+        new_lst.append(item)
+    new_lst.append(lst[last - y:])
+
+mins = [str(min(z)) for z in new_lst]
+print(" ".join(mins))
+"""
+
+"""    
+# contest #2 Problem D
+n = int(input())
+
+for i in range(n):
+    a1,an= [int(i) for i in input().split(" ")]
+    my_sum = ((a1 + an) * (abs(an - a1) + 1)) // 2
+
+    print(my_sum)
+
+"""
+
+"""
+# contest #2 Problem E
+
+id_ = int(input())
+
+row = 
+column = 
+
+print(f"{row} {column}")
+"""
+
+"""
+# contest #2 Problem F
+
+n = input()
+nums = [int(x) for x in input().split(" ")]
+
+fx = []
+
+for num in nums :
+    count = 0
+    while num % 2 == 0:
+        count += 1
+        num //= 2
+    fx.append(count)
+
+print(max(fx))
+"""
+
+# contest #2 Problem G
+
+"""
+# Sheet #3 Problem A
+n = int(input())
+nums = [int(x) for x in input().split(" ")]
+
+sum_ = 0
+for i in nums:
+    sum_ += i
+print(sum_ if sum_ >= 0 else sum_ * -1)
+"""
+"""
+# Sheet #3 Problem B
+
+n = int(input())
+nums = [int(x) for x in input().split(" ")]
+x = int(input())
+
+print(nums.index(x) if x in nums else -1)
+"""
+"""
+# Sheet #3 Problem C
+
+n = int(input())
+nums = [int(x) for x in input().split(" ")]
+
+for index,i in list(enumerate(nums)):
+    if i > 0 :
+        nums[index] = "1"
+    elif i < 0:
+        nums[index] = "2"
+    else:
+        nums[index] = "0"
+
+print(" ".join(nums))
+"""
+"""
+# Sheet #3 Problem D
+n = int(input())
+nums = [int(x) for x in input().split(" ")]
+
+output = []
+
+for index,i in enumerate(nums):
+    if i <= 10:
+        output.append(f"A[{index}] = {i}")
+
+for i in output:
+    print(i)
+"""
+"""
+# Sheet #3 Problem E
+
+n = input()
+nums = [int(x) for x in input().split(" ")]
+
+print(f"{min(nums)} {nums.index(min(nums)) + 1}")
+"""
+"""
+# Sheet #3 Problem F
+
+n = input()
+
+nums = [x for x in input().split(" ")]
+print(" ".join(list(reversed(nums))))
+"""
+
+"""
+# Sheet #3 Problem G
+
+n = input()
+nums = input()
+reverse = nums[::-1]
+
+if nums == reverse:
+    print("YES")
+else:
+    print("NO")
+"""
+
+
+"""
+# Introduction to Math : geometric progression
+
+a,b,c,d = [int(x) for x in input().split(" ")]
+
+if d / c == c / b == b / a :
+    r = d / c
+    print(int(d * r) if (int(d*r) / (d*r) == 1.0) else 42)
+elif d - c == c - b == b - a  :
+    n = d - c
+    print(d + n if type(d + n) == int else 42)
+else:
+    print(42)
+"""
+"""
+# ECPC 2017 Problem L
+
+with open("lazy.in",'r') as f:
+    lines = []
+
+    for line in f.readlines():
+        lines.append(line.strip())
+    
+    n = lines[0]
+    for index,i in enumerate(lines[1:],start = 1):
+        print(f"Case {index}: {int(i) - 1}")
+
+"""
